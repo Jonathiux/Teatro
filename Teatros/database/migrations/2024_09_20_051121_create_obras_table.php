@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teatros', function (Blueprint $table) {
+        Schema::create('obras', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('ubicacion');
+            // $table->foreign('teatro_id')->references('id')->on('teatros');
+            $table->string('titulo');
             $table->string('descripcion');
+            $table->string('director');
             $table->string('imagen');
-            $table->string('capacidad');
+            $table->string('duracion');
+            $table->string('genero');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teatros');
+        Schema::dropIfExists('obras');
     }
 };
