@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('teatros', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('ubicacion');
-            $table->string('descripcion');
-            $table->string('imagen');
-            $table->string('capacidad');
+
+            $table->string('nombre')->nullable();
+            $table->string('ubicacion')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('imagen')->nullable();
+            $table->string('capacidad')->nullable();
+            $table->integer('status')->default(1);
+            
             $table->timestamps();
         });
     }

@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('obras', function (Blueprint $table) {
             $table->id();
-            // $table->foreign('teatro_id')->references('id')->on('teatros');
-            $table->string('titulo');
-            $table->string('descripcion');
-            $table->string('director');
-            $table->string('imagen');
-            $table->string('duracion');
-            $table->string('genero');
+
+            $table->integer('teatro_id')->nullable();
+            $table->string('titulo')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('director')->nullable();
+            $table->string('imagen')->nullable();
+            $table->string('duracion')->nullable();
+            $table->string('genero')->nullable();
+            $table->integer('status')->default(1);
+            
             $table->timestamps();
         });
     }

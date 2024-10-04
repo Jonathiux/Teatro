@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('funcions', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('obra_id')->constrained('obras');
-            // $table->foreignId('teatro_id')->constrained('teatros');
-            $table->date('fecha');
-            $table->time('hora');
-            $table->decimal('precio');
-            $table->integer('disponibles');
-            $table->integer('vendidos');
+
+            $table->integer('teatro_id')->nullable();
+            $table->integer('obra_id')->nullable();
+            $table->date('fecha')->nullable();
+            $table->time('hora')->nullable();
+            $table->decimal('precio')->nullable();
+            $table->integer('disponibles')->nullable();
+            $table->integer('vendidos')->nullable();
+            $table->integer('status')->default(1);
+            
             $table->timestamps();
         });
     }

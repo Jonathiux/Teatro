@@ -12,12 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('boletos', function (Blueprint $table) {
+            
             $table->id();
-            // $table->foreignId('funcion_id')->constrained('funcions');
-            // $table->foreignId('usuario_id')->constrained('usuarios');
-            $table->string('codigo_qr');
-            $table->date('fecha_compra');
+
+            $table->integer('funcion_id')->nullable();
+            $table->integer('usuario_id')->nullable();
+            $table->string('codigo_qr')->nullable();
+            $table->date('fecha_compra')->nullable();
             $table->enum('estado', ['pagado', 'cancelado', 'pendiente']);
+            $table->integer('status')->default(1);
+
             $table->timestamps();
         });
     }

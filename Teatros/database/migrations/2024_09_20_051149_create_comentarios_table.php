@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('usuario_id')->constrained('usuarios');
-            // $table->foreignId('obra_id')->constrained('obras');
-            $table->string('comentario');
-            $table->integer('calificacion');
-            $table->date('fecha');
+
+            $table->integer('usuario_id')->nullable();
+            $table->integer('obra_id')->nullable();
+            $table->string('comentario')->nullable();
+            $table->integer('calificacion')->nullable();
+            $table->date('fecha')->nullable();
+            $table->integer('status')->default(1);
+            
             $table->timestamps();
         });
     }
