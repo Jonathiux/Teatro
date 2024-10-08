@@ -7,7 +7,7 @@
         <h2>Crear un nuevo teatro</h2>
     </div>
     <div class="row">
-        <form action="{{ route('teatros.store') }}" method="post" enctype="multipart/form-data" class="col-lg-7">
+        <form action="{{ route('teatro.store') }}" method="post" enctype="multipart/form-data" class="col-lg-7">
             @csrf
             <!-- Protección contra ataques ya implementado en laravel  https://www.welivesecurity.com/la-es/2015/04/21/vulnerabilidad-cross-site-request-forgery-csrf/-->
             @if($errors->any())
@@ -31,6 +31,10 @@
             <div class="form-group">
                 <label for="descripcion">descripcion</label>
                 <textarea class="form-control" id="descripcion" name="descripcion">{{old('descripcion')}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="imagen">Imagen</label>
+                <input type="text" class="form-control" id="imagen" name="imagen" value="{{old('imagen')}}">
             </div>
             <div class="form-group">
                 <label for="capacidad">Capacidad</label>
