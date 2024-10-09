@@ -50,8 +50,6 @@
                 </div>
                 <div class="modal-body">
                     <span id="nombre"></span>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -75,7 +73,7 @@
         function modal(parametro) {
             console.log(parametro);
             $('#nombre').html(parametro);
-            let url = "{{ route('delete', ':id') }}";
+            let url = "{{ route('delete-teatro', ':id') }}";
             url = url.replace(':id', parametro);
             document.getElementById('borrar').href = url;
         }
