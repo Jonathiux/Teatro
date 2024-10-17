@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('funcions', function (Blueprint $table) {
+        Schema::create('funciones', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('teatro_id')->nullable();
-            $table->integer('obra_id')->nullable();
             $table->date('fecha')->nullable();
             $table->time('hora')->nullable();
             $table->decimal('precio')->nullable();
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('funcions');
+        Schema::dropIfExists('funciones');
     }
 };

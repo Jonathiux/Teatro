@@ -15,8 +15,6 @@ return new class extends Migration
             
             $table->id();
 
-            $table->integer('funcion_id')->nullable();
-            $table->integer('usuario_id')->nullable();
             $table->string('codigo_qr')->nullable();
             $table->date('fecha_compra')->nullable();
             $table->enum('estado', ['pagado', 'cancelado', 'pendiente']);

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nombre')->nullable();
             $table->string('ubicacion')->nullable();
             $table->string('descripcion')->nullable();
-            $table->string('imagen')->nullable();
             $table->string('capacidad')->nullable();
             $table->integer('status')->default(1);
             

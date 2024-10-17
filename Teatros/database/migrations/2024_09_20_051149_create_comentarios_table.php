@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('usuario_id')->nullable();
-            $table->integer('obra_id')->nullable();
             $table->string('comentario')->nullable();
             $table->integer('calificacion')->nullable();
             $table->date('fecha')->nullable();

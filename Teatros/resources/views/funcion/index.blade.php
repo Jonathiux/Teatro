@@ -14,24 +14,25 @@
             @endif
         </div>
         <div class="row">
-            <h2>Lista de Teatros</h2>
+            <h2>Lista de Obras</h2>
             <hr>
             <br>
             <p align="right">
-                <a href="{{ route('teatro.create') }}" class="btn btn-success">Crear Teatro</a>
+                <a href="{{ route('funcion.create') }}" class="btn btn-success">Crear Funcion</a>
                 <a href="{{ route('home') }}" class="btn btn-primary">
                     Regresar
                 </a>
             </p>
-            <table id="teatro" class="table table-striped table-bordered" style="width:100%">
+            <table id="funcion" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>Acciones</th>
-                        <th>Id Teatro</th>
-                        <th>Nombre</th>
-                        <th>Ubicacion</th>
-                        <th>Descripcion</th>
-                        <th>Capacidad</th>
+                        <th>Id Funcion</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Precio</th>
+                        <th>Disponibles</th>
+                        <th>Vendidos</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,14 +45,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">¿Seguro que desea eliminar?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <span id="nombre"></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <a href="" id="borrar" class="btn btn-danger">borrar</a>
                 </div>
             </div>
@@ -70,17 +71,18 @@
         function modal(parametro) {
             console.log(parametro);
             $('#nombre').html(parametro);
-            let url = "{{ route('deleteTeatro', ':id') }}";
+            let url = "{{ route('deleteFuncion', ':id') }}";
             url = url.replace(':id', parametro);
+            console.log(url);
             document.getElementById('borrar').href = url;
         }
-        var data = @json($teatro);
+        var data = @json($funcion);
         $(document).ready(function() {
             // version de jquery
             console.log($.fn.jquery);
 
 
-            $('#teatro').DataTable({
+            $('#funcion').DataTable({
                 "data": data,
                 "pageLength": 100,
                 "order": [

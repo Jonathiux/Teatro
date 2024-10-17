@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teatro;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -25,11 +26,15 @@ class TeatrosController extends Controller
         $Teatro = [];
         foreach ($consulta as $key => $value) {
             $actualizar = route('teatro.edit', $value['id']);
+            $imprimir =  route('imprimirTeatros', $value['id']) ;
             $acciones = '
            <div class="btn-acciones">
                <div class="btn-circle">
                    <a href="' . $actualizar . '" role="button" class="btn btn-success" title="Actualizar">
                        <i class="far fa-edit"></i>
+                   </a>
+                   <a href="' . $imprimir . '" role="button" class="btn btn-warning" title="Imprimir">
+                       <i class="far fa-download"></i>
                    </a>
                     <a role="button" class="btn btn-danger" onclick="modal(' . $value['id'] . ')" data-bs-toggle="modal" data-bs-target="#exampleModal"">
                        <i class="far fa-trash-alt"></i>
@@ -44,7 +49,6 @@ class TeatrosController extends Controller
                 $value['nombre'],
                 $value['ubicacion'],
                 $value['descripcion'],
-                $value['imagen'],
                 $value['capacidad'],
             );
         }
@@ -69,7 +73,6 @@ class TeatrosController extends Controller
             'nombre' => 'required',
             'ubicacion' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required',
             'capacidad' => 'required',
         ]);
 
@@ -78,7 +81,6 @@ class TeatrosController extends Controller
         $Teatro->ubicacion = $request->input('ubicacion');
         $Teatro->descripcion = $request->input('descripcion');
         $Teatro->capacidad = $request->input(key: 'capacidad');
-        $Teatro->imagen = $request->input('imagen');
         $Teatro->status = 1;
         $Teatro->save();
         return redirect()->route('teatro.index')->with(array(
@@ -115,7 +117,6 @@ class TeatrosController extends Controller
             'nombre' => 'required',
             'ubicacion' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required',
             'capacidad' => 'required',
         ]);
 
@@ -124,7 +125,6 @@ class TeatrosController extends Controller
         $Teatro->ubicacion = $request->input('ubicacion');
         $Teatro->descripcion = $request->input('descripcion');
         $Teatro->capacidad = $request->input(key: 'capacidad');
-        $Teatro->imagen = $request->input('imagen');
         $Teatro->save();
         return redirect()->route('teatro.index')->with(array(
             'message' => 'El teatro se ha actualizado correctamente'
@@ -143,6 +143,13 @@ class TeatrosController extends Controller
             return redirect()->route('teatro.index')->with("message", "El teatro que trata de eliminar no existe");
         }
     }
+
+    public function imprimir($id){
+        $Teatro = Teatro::findOrFail($id);
+        $pdf = PDF::loadView('teatro.imprimir', array(
+            'teatro' => $Teatro));
+        return $pdf->download('Teatro.pdf');
+   }
 
     /**
      * Remove the specified resource from storage.
